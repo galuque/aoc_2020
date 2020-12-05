@@ -1,11 +1,9 @@
 (ns galuque.aoc-2020.day-2
-  (:require [clojure.java.io :as io]
-            [clojure.string :as str]))
+  (:require [clojure.java.io :as io]))
 
-(def sample-input (str/split "1-3 a: abcde
+(def sample-input  "1-3 a: abcde
 1-3 b: cdefg
-2-9 c: ccccccccc"
-                              #"\n"))
+2-9 c: ccccccccc")
 
 (def re #"(\d+)-(\d+) (.): (.*)")
 
