@@ -21,7 +21,7 @@
   [input]
   (mapv (fn [row]
           (mapv {\# true \. false} row))
-        (str/split input #"\n")))
+        (str/split-lines input)))
 
 (defn tree?
   [m x y]
