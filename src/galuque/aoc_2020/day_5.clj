@@ -8,13 +8,11 @@
 
 (def encoding {\F 0 \B 1 \L 0 \R 1})
 
-(defn chars->num [chars]
-  (Long/parseLong (reduce str (map encoding chars)) 2))
-
 (defn seat-id [pass]
-  (let [[row col] (partition-all 7 pass)]
-    (+ (chars->num col)
-       (* 8 (chars->num row)))))
+  (->> pass
+       (map encoding)
+       (reduce str "2r")
+       (read-string)))
 
 ;; part 1
 (def seat-ids (map seat-id input))
