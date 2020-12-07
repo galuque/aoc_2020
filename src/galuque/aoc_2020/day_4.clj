@@ -61,5 +61,4 @@ iyr:2011 ecl:brn hgt:59in")
  (map parse-passport)
  (filter valid-passport-2?)
  count)
-;; => 0
-
+;; => 198
