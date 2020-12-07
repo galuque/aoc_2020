@@ -18,18 +18,17 @@
        (* 8 (chars->num row)))))
 
 ;; part 1
-(apply max (map seat-id input))
+(def seat-ids (map seat-id input))
+(apply max seat-ids)
 ;; => 938
 
 ;; part 2
-(apply min (map seat-id input))
+(defn skipped?
+  [[low high]]
+  (when (= high (+ 2 low))
+    (inc low)))
 
-(def real-passes (map seat-id input))
-
-(def complete-passes
-  (range (apply min (map seat-id input))
-         (apply max (map seat-id input))))
-
-(set/difference (set complete-passes)
-                (set real-passes))
-;; => #{696}
+(some
+ skipped?
+ (partition-all 2 1 (sort seat-ids)))
+;; => 696
