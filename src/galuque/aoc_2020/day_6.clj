@@ -20,26 +20,12 @@ a
 b")
 
 (def input
-  (slurp (io/resource "day_6/input.txt")))
-
-(defn parse-input
-  [input]
-  (-> input
-   (str/split #"\n\n")
-   (->> 
-    (map str/split-lines))))
-
-(defn count-answers
-  [answers]
-  (-> answers
-      str/join
-      set
-      count))
+  (map str/split-lines (str/split (slurp (io/resource "day_6/input.txt")) #"\n\n")))
 
 ;; part 1
 (apply +
-       (map count-answers
-            (parse-input input)))
+       (map (comp count set str/join)
+            input))
 ;; => 7128
 
 ;; part 2
@@ -47,11 +33,10 @@ b")
   [answers]
   (->> answers
        (map set)
-       (reduce set/intersection)
+       (apply set/intersection)
        count))
 
- (apply +
-        (map count-answers-2
-             (parse-input input)))
+(transduce (map count-answers-2)
+           +
+           input)
 ;; => 3640
-

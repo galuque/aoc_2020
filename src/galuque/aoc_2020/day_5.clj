@@ -1,6 +1,5 @@
 (ns galuque.aoc-2020.day-5
-  (:require [clojure.java.io :as io]
-            [clojure.set :as set]))
+  (:require [clojure.java.io :as io]))
 
 (def sample-pass "FBFBBFFRLR")
 
