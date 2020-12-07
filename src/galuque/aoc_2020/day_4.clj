@@ -42,7 +42,7 @@ iyr:2011 ecl:brn hgt:59in")
 
 ;; part 2
 (defn valid-passport-2?
-  [{:strs [byr iyr eyr hgt hcl ecl pid cid]}]
+  [{:strs [byr iyr eyr hgt hcl ecl pid]}]
   (and
    byr (<= 1920 (Long/parseLong byr) 2002)
    iyr (<= 2010 (Long/parseLong iyr) 2020)
