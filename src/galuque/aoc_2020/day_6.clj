@@ -3,21 +3,8 @@
             [clojure.string :as str]
             [clojure.set :as set]))
 
-(def sample-input "abc
-
-a
-b
-c
-
-ab
-ac
-
-a
-a
-a
-a
-
-b")
+(def sample-input 
+  (map str/split-lines (str/split (slurp (io/reader (io/resource "day_6/sample_input.txt"))) #"\n\n")))
 
 (def input
   (map str/split-lines (str/split (slurp (io/resource "day_6/input.txt")) #"\n\n")))
@@ -36,7 +23,7 @@ b")
        (apply set/intersection)
        count))
 
-(transduce (map count-answers-2)
-           +
-           input)
+(reduce
+ +
+ (map count-answers-2 input))
 ;; => 3640
