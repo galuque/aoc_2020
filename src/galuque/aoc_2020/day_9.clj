@@ -51,3 +51,28 @@
 (find-invalid 25 input)
 ;; => #{552655238}
 
+;; part 2
+
+(defn find-weakness
+  [target part options]
+  (for [coll options
+        :while (= part (count coll))
+        :let [weakness (+ (apply max coll)
+                          (apply min coll))
+              sum-coll (apply + coll)]
+        :when (= target sum-coll)]
+    weakness))
+
+(defn weakness
+  [pream input]
+  (let [target (first (find-invalid pream input))
+        get-options #(partition-all % 1 input)]
+    (loop [part 4]
+      (let [weak (find-weakness target part (get-options part))]
+        (if (seq weak)
+          weak
+          (recur
+           (inc part)))))))
+
+(weakness 25 input)
+;; => (70672245)
