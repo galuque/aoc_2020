@@ -1,6 +1,5 @@
 (ns galuque.aoc-2020.day-8
-  (:require [clojure.string :as str]
-            [clojure.java.io :as io]))
+  (:require [clojure.java.io :as io]))
 
 (def sample-input
   (slurp (io/resource "day_8/sample_input.txt")))
@@ -28,7 +27,7 @@
             (recur (-> state
                        (update :pc inc)
                        (update :seen? conj pc)))
-            :acc 
+            :acc
             (recur (-> state
                        (update :acc + arg)
                        (update :pc inc)
@@ -45,15 +44,16 @@
 (defn run-program-2 [program]
   (let [init-state {:pc 0
                     :acc 0
-                    :seen? #{}}]
+                    :seen? #{}}
+        total-ins (count program)]
     (loop [{:keys [pc acc seen?] :as state} init-state]
-      (cond 
+      (cond
         (seen? pc)
         :infinite-loop
-        
-        (= pc (count program))
+
+        (= pc total-ins)
         acc
-        
+
         :else
         (let [[op arg] (get program pc)]
           #_(prn [op arg] state)
@@ -77,12 +77,10 @@
   (let [program (parse-input input)]
     (for [i (range (count program))
           :when (#{:nop :jmp} (get-in program [i 0]))
-          :let [program (update-in program [i 0] {:jmp :nop :nop :jmp})
+          :let [program (update-in program [i 0] {:jmp :nop, :nop :jmp})
                 result (run-program-2 program)]
           :when (not= :infinite-loop result)]
       result)))
 
 (find-faulty-op input)
 ;; => (2092)
-
-
