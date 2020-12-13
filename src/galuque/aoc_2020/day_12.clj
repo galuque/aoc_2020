@@ -1,7 +1,5 @@
 (ns galuque.aoc-2020.day-12
-  (:require [clojure.java.io :as io]
-            [clojure.string :as str]
-            [clojure.set :as set]))
+  (:require [clojure.java.io :as io]))
 
 (def sample-input
   (slurp (io/resource "day_12/small_input.txt")))
@@ -125,11 +123,8 @@
   (let [{:keys [waypoint]} state
         new-waypoint (for [card (keys waypoint)
                            :let [pos (card waypoint)
-                                 new-dir (-> turns
-                                             card
-                                             dir
-                                             (get amount))]]
-                [new-dir pos])]
+                                 new-dir (rotate-dir card dir amount)]]
+                       [new-dir pos])]
    (assoc state :waypoint (into {} new-waypoint))))
 
 
