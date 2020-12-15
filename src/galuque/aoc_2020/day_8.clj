@@ -21,7 +21,6 @@
       (if (seen? pc)
         acc
         (let [[op arg] (get program pc)]
-          #_(prn [op arg] state)
           (case op
             :nop
             (recur (-> state
@@ -56,7 +55,6 @@
 
         :else
         (let [[op arg] (get program pc)]
-          #_(prn [op arg] state)
           (case op
             :nop
             (recur (-> state

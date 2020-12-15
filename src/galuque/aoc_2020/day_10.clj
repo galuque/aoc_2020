@@ -32,22 +32,6 @@
 
 ;; part 2
 
-
-#_(loop [options (sort (conj small-input  (+ 3 (apply max small-input))))
-       qty 0
-       root 0]
-  (let [result (for [x options
-                     :while (<= (- x root) 3)]
-                 x)]
-    (prn result qty root options)
-    (if (not (seq options))
-      qty
-      (recur
-       (next options)
-       (+ qty (count result))
-       (first options)))))
-
-
 (defn remove-index [v ^long idx]
   (into (subvec v 0 idx) (subvec v (inc idx) (count v))))
 
