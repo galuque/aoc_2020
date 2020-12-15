@@ -53,5 +53,3 @@
 (part1 input-parsed)
 ;; => 6559449933360
 
-
-;; part 2
