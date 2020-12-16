@@ -1,6 +1,9 @@
 (ns galuque.aoc-2020.day-15
   (:require [clojure.string :as str]))
 
+(set! *warn-on-reflection* true)
+(set! *unchecked-math* :warn-on-boxed)
+
 (def sample-input
    (mapv #(Long/parseLong %) (str/split "0,3,6" #",")))
 
@@ -20,13 +23,13 @@
         last-spoken
         (if ((:seen? state) last-spoken)
           (recur
-           (assoc-in state [:turns-spoken] (assoc (:turns-spoken state) last-spoken turn))
-           (- turn (get-in state [:turns-spoken last-spoken]))
+           (assoc-in state [:turns-spoken (long last-spoken)] turn)
+           (long (unchecked-subtract-int turn (get-in state [:turns-spoken last-spoken])))
            (inc turn))
           (recur
            (-> state
                (assoc-in [:seen?] (conj (:seen? state) last-spoken))
-               (assoc-in [:turns-spoken] (assoc (:turns-spoken state) last-spoken turn)))
+               (assoc-in [:turns-spoken last-spoken] turn))
            0
            (inc turn)))))))
 
@@ -34,8 +37,8 @@
 ;; => 447
 
 ;; part 2
-;; takes forever
-(time 
+;; takes too long
+(time
  (number-spoken-at 30000000 input))
 ;; => 11721679
 ;; "Elapsed time: 35779.42395 msecs"
