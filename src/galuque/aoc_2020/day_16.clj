@@ -56,3 +56,6 @@
 
 (error-rate input)
 ;; => 24021
+
+
+;; part 2
