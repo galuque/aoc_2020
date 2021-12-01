@@ -11,3 +11,7 @@
 .hg/
 .aoc
 .calva
+.clj-kondo/
+.idea/
+.lsp/
+.portal/
